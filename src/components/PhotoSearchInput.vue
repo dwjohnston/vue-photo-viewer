@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import PhotoExplorer from './components/PhotoExplorer.vue';
+
 </script>
 
 <template>
-
-  <PhotoExplorer />
+    <div>photo search input</div>
 </template>
 
 <style scoped></style>
