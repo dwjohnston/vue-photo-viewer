@@ -23,3 +23,15 @@ The complexity of this challenge is in the PhotoSearchInput, and having it throt
 ☝️ - Note. Comments that don't 
 
 🧑‍🔬 - Comments about Vue itself, observations I'm making given that I'm new to it. 
+
+## Process notes/use of AI
+
+I made extensive use of Copilot, which zomg, makes a task like this a lot easier, particularly where it's a framework I have not used with any depth. 
+
+The prompting process resembles the process I would use to code the thing without copilot -  first add the empty components, now get the search input returning something/anything and display it, now get it to make API requests...  you can follow the git commits to get any idea. 
+
+I didn't paste in the exercise and tell it to do the whole thing, though now that I mention it, I'm curious how that would turn out 😅. 
+
+Copilot was pretty good. It did get bit lost trying to set up the props for the PhotoDisplay component. 
+
+
