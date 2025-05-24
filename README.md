@@ -1,8 +1,25 @@
 # Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Instructions 
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Run the application with
+
+```
+npm run dev
+```
+
+View storybook 
+
+```
+npm run storybook
+```
+
+With Storybook running, run tests with 
+
+```
+npm test
+```
+
 
 ## Solution notes
 
@@ -15,6 +32,12 @@ The wireframe suggests displaying both the photographer, and the country in the 
 
 - State management. None. 
 The complexity of this challenge is in the PhotoSearchInput, and having it throttle the requests. Real world, IMO such a component shouldn't rely on external state management being present anyway. Generally speaking it's better if a component is self-sufficient. 
+
+Note that I provided the data fetching function via Vue's dependency injection mechanism, and I make use of this for the tests. 
+
+- Tests written with Storybook. This is somewhat experimental on my part. But basically I think I think a better development experience for tests if you can see what is happening. And because Storybook runs in a real browser, you don't have issues that you can run into with JSDOM based solutions, where not all browser APIs are supported. 
+
+It does add some complexity as far as the tests in a build pipeline goes, because you need to wait for Storybook to be built and deployed, but this is probably something you want to do as part of a branch build anyway.
 
 ## Comments 
 

@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "test": "test-storybook",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -20,6 +22,7 @@
     "@storybook/blocks": "^8.6.14",
     "@storybook/experimental-addon-test": "^8.6.14",
     "@storybook/test": "^8.6.14",
+    "@storybook/test-runner": "^0.22.0",
     "@storybook/vue3": "^8.6.14",
     "@storybook/vue3-vite": "^8.6.14",
     "@types/node": "^22.15.21",

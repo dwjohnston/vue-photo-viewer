@@ -25,7 +25,7 @@ export function createMockFetchPhotos() : typeof fetchPhotos {
               "tiny": "https://images.pexels.com/photos/2097616/pexels-photo-2097616.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
             },
             "liked": false,
-            "alt": "Breathtaking aerial view of Melbourne skyline along the Yarra River with lush greenery."
+            "alt": "Foo #1"
           },
           {
             "id": 3626248,
@@ -47,7 +47,7 @@ export function createMockFetchPhotos() : typeof fetchPhotos {
               "tiny": "https://images.pexels.com/photos/3626248/pexels-photo-3626248.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
             },
             "liked": false,
-            "alt": "Stunning daytime view of Melbourne's modern skyline with high-rise buildings and lush greenery."
+            "alt": "Foo #2"
           }], 
         bar: [
             {
@@ -70,7 +70,7 @@ export function createMockFetchPhotos() : typeof fetchPhotos {
                   "tiny": "https://images.pexels.com/photos/622038/pexels-photo-622038.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
                 },
                 "liked": false,
-                "alt": "Stunning twilight view of Melbourne's cityscape featuring illuminated skyscrapers and the Yarra River."
+                "alt": "Bar #1"
               }
         ], 
         food: [
@@ -94,17 +94,20 @@ export function createMockFetchPhotos() : typeof fetchPhotos {
                   "tiny": "https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
                 },
                 "liked": false,
-                "alt": "Close-up of a map of Australia with colorful pins marking various cities and destinations."
+                "alt": "Food #1"
               }
         ],
     }
 
     return async (query: string) => {
+
+        console.log(query)
         
         const keys = Object.keys(mockData);; 
         const relevantKeys = keys.filter((key) => key.includes(query));
         const releventPhotos = relevantKeys.flatMap((v) => mockData[v]);
 
+        console.log(relevantKeys,releventPhotos);
         return {
             page: 1,
             per_page: 10,
