@@ -2,13 +2,11 @@
 import { defineEmits, inject } from 'vue';
 import type { PhotoSearchResponse } from '../services/fetchPhotos';
 
-// Define the props for the component
-
-
-// Define an emit event to send the input value to the parent component
 const emit = defineEmits(['updateSearchQuery']);
 
 // 🧑‍🔬 No type safety for dependency injection? 🤮
+// There is this: https://vuejs.org/guide/typescript/composition-api.html#typing-provide-inject
+// But I can't currently work out how to use it. 
 const fetchPhotos = inject('fetchPhotos') as (query: string) => Promise<PhotoSearchResponse>;
 
 const handleInput = async (event: Event) => {

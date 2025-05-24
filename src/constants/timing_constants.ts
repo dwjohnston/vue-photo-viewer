@@ -1,0 +1,1 @@
+export const PHOTO_SEARCH_INPUT_DEBOUNCE_MS = 400;
