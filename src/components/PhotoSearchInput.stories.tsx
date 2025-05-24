@@ -2,7 +2,8 @@ import { fn } from '@storybook/test';
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 import PhotoSearchInput, { type PhotoSearchResponse } from './PhotoSearchInput.vue';
-import { ref } from 'vue';
+import { provide, ref } from 'vue';
+import { createMockFetchPhotos } from '../services/createMockFetchPhotos';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -30,10 +31,11 @@ export const Primary: Story = {
         setup() {
             const searchQuery = ref<PhotoSearchResponse | null>(null);
 
-            // Update the searchQuery whenever the event is emitted
+            provide('fetchPhotos', createMockFetchPhotos());
+
             const handleUpdateSearchQuery = (result: PhotoSearchResponse | null) => {
                 searchQuery.value = result;
-                args.onUpdateSearchQuery?.(result); // Log the event in Storybook actions
+                args.onUpdateSearchQuery?.(result);
             };
 
             return { args, searchQuery, handleUpdateSearchQuery };

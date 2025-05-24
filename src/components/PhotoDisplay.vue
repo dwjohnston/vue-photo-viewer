@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { PhotoSearchResponse } from './PhotoSearchInput.vue';
+import type { PhotoSearchResponse } from '../services/fetchPhotos';
+
+
 
 const { photos } = defineProps<{
     photos: PhotoSearchResponse | null

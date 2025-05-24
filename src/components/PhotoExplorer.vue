@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import PhotoDisplay from './PhotoDisplay.vue';
-import PhotoSearchInput, { type PhotoSearchResponse } from './PhotoSearchInput.vue';
+import PhotoSearchInput from './PhotoSearchInput.vue';
+import type { PhotoSearchResponse } from '../services/fetchPhotos';
 
 // Reactive variable to store the search query
 const searchResult = ref<PhotoSearchResponse | null>(null)
