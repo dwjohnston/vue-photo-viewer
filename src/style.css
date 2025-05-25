@@ -1,4 +1,7 @@
 :root {
+
+
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,20 +14,25 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-color: #242424;
+  --bg-color-header: #1a1a1a;
+  --text-color: rgba(255, 255, 255, 0.87);
+
+
+  background-color: var(--bg-color);
+  color: (var--text-color);
 }
 
+body {
+  margin: 0;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+    --bg-color: #ffffff;
+    --bg-color-header: #f0f0f0;
+    --text-color: #242424;
 
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
   }
 }

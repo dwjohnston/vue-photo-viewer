@@ -11,7 +11,7 @@ const { photos } = defineProps<{
 <template>
     <div>
 
-        <div v-if="!photos" class="no-photos-message">No photos to display</div>
+        <div v-if="!photos" class="no-photos-message">We couldn't find any images that matched your search term.</div>
         <div v-else class="photo-display">
             <div v-for="photo in photos.photos" :key="photo.id" class="photo-item">
                 <img :src="photo.src.medium" :alt="photo.alt" />

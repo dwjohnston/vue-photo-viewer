@@ -42,7 +42,7 @@ const updateSearchResult = (result: PhotoSearchResponse | null) => {
 
 header,
 footer {
-    background: var(--header-bg);
+    background: var(--bg-color-header);
     padding: 1rem;
     text-align: center;
 }
