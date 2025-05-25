@@ -36,12 +36,21 @@ export interface PhotoSrc {
 
 
 export async function fetchPhotos(query: string): Promise<PhotoSearchResponse> {
-        const response = await fetch(`${SEARCH_PHOTOS_URL}?` + new URLSearchParams({ query }));
-        // Check if the response is ok (status in the range 200-299)
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        // 💬 Could validate the response shape here. 
-        return result;
+
+    // 💬
+    // Uncomment this to demonstrate a bug
+    // Then, in the actual application, type 'mel' and then a delay, and then 'b'
+    // What you will see is that the 'mel' query will clobber the 'melb' query.
+    // if (query === "mel") {
+    //     await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay for "mel"
+    // }
+
+    const response = await fetch(`${SEARCH_PHOTOS_URL}?` + new URLSearchParams({ query }));
+    // Check if the response is ok (status in the range 200-299)
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    // 💬 Could validate the response shape here. 
+    return result;
 }

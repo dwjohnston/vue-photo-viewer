@@ -26,11 +26,9 @@ const meta = {
         setup() {
             const searchQuery = ref<PhotoSearchResponse | null>(null);
 
-
             const fetchPhotos = createMockFetchPhotos();
-            console.log(args);
-            provide('fetchPhotos', (query: string) => {
-                mockFn(query);
+            provide('fetchPhotos', async (query: string) => {
+
                 return fetchPhotos(query);
             });
 
@@ -151,6 +149,81 @@ export const DebouncingTest: Story = {
         expect(canvas.queryByText("Foo #1")).not.toBeInTheDocument();
         expect(canvas.queryByText("Foo #2")).not.toBeInTheDocument();
         expect(canvas.queryByText("Bar #1")).not.toBeInTheDocument();
+
+    },
+};
+
+/**
+ * This test covers a scenario where the first query is slower than the second query, and so the first query clobbers the second query.
+ */
+export const OutOfOrderTest: Story = {
+
+    // 💬
+    // Not too happy with having to repeat the boilerplate. 
+    // Maybe theres's better way to do this.
+    render: (args) => ({
+        components: { PhotoSearchInput },
+        setup() {
+            const searchQuery = ref<PhotoSearchResponse | null>(null);
+
+
+            const fetchPhotos = createMockFetchPhotos();
+            provide('fetchPhotos', async (query: string) => {
+                mockFn(query);
+                // ☝️ Here we simulate a slow query for 'foo' and a fast query for 'food'.
+                if (query === "foo") {
+                    await new Promise(resolve => setTimeout(resolve, PHOTO_SEARCH_INPUT_DEBOUNCE_MS * 2));
+                }
+                else {
+                    await new Promise(resolve => setTimeout(resolve, PHOTO_SEARCH_INPUT_DEBOUNCE_MS * 0.25));
+                }
+                return fetchPhotos(query);
+            });
+
+            const handleUpdateSearchQuery = (result: PhotoSearchResponse | null) => {
+                searchQuery.value = result;
+                args.onUpdateSearchQuery?.(result);
+            };
+
+            return { args, searchQuery, handleUpdateSearchQuery };
+        },
+
+        template: `
+          <div>
+            <PhotoSearchInput @updateSearchQuery="handleUpdateSearchQuery" />
+            <label>Result:
+                <p v-for="photo in searchQuery?.photos || []" :key="photo.id">{{ photo.alt }}</p>
+            </label>
+          </div>
+        `,
+
+
+    }),
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+
+        expect(mockFn).not.toHaveBeenCalled();
+
+        const input = canvas.getByRole('textbox');
+
+        // Start typing 'foo' - this query will be slow        
+        userEvent.type(input, 'foo');
+
+        // Wait till we're out of the debounce period
+        await new Promise((resolve) => setTimeout(resolve, PHOTO_SEARCH_INPUT_DEBOUNCE_MS * 1.5));
+        userEvent.type(input, 'd');
+
+        // The second query resolves and we see #Food #1
+        expect(await canvas.findByText("Food #1")).toBeInTheDocument();
+        expect(canvas.queryByText("Foo #1")).not.toBeInTheDocument();
+        expect(canvas.queryByText("Foo #2")).not.toBeInTheDocument();
+
+        // Wait for the first query to resolve
+        await new Promise((resolve) => setTimeout(resolve, PHOTO_SEARCH_INPUT_DEBOUNCE_MS * 3));
+
+        // It should not have clobbered the second query
+        expect(canvas.queryByText("Foo #1")).not.toBeInTheDocument();
+        expect(canvas.queryByText("Foo #2")).not.toBeInTheDocument();
 
     },
 };

@@ -17,7 +17,6 @@ const debouncedFetchPhotos = debounce(async (query: string) => {
     let searchResult
     try {
         searchResult = await fetchPhotos(query);
-        console.log('searchResult', searchResult);
     } catch (err) {
 
         // 💬 Bit of a question about how we want to handle errors. 
