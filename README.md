@@ -67,7 +67,7 @@ There is a bug in the application in the following scenario:
 1. The types the first three letters of their query 'foo', this triggers a request, and for this scenario this request will take say 2000ms. 
 2. The user waits 200ms, and then types another letter 'd', this triggers another request and this request takes 200ms. 
 3. The second request completes and the photos are displayed
-3. ~1800ms later the first request completes, and errnoeously clobbers the second query. 
+3. ~1800ms later the first request completes, and erroneously clobbers the second query. 
 
 There is a failing test (OutOfOrderTest) that detects this issue. 
 
