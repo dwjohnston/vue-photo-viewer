@@ -75,6 +75,10 @@ Note that this issue occurs whether or not we are debouncing the query or not (A
 
 Resolving the bug: 
 
+Possibly there's a really tidy way Vue handles this? Where basically only the async work that is relevant the most recent keystroke applies, and the rest can be left hanging. (Should still be cleaned up though). 
+
+But if not, here's my notes:
+
 1. An [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) is an appropriate mechanism for handling this scenario. 
 Essentially, before the second query starts, the first query should be aborted. 
 
