@@ -48,7 +48,7 @@ It does add some complexity as far as the tests in a build pipeline goes, becaus
 
 💬 - Comment about the solution. 'Discuss this in pull request' type comments.
 
-☝️ - Note. Comments that don't 
+☝️ - Note. Bits of interest that don't necessarily need attention. 
 
 🧑‍🔬 - Comments about Vue itself, observations I'm making given that I'm new to it. 
 
